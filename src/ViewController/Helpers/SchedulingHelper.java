@@ -34,5 +34,10 @@ public class SchedulingHelper {
 		 }
 	 }
 	 
+	 
+	 public voidi atualizaCliente() {
+		 
+	 }
+	 
 	  
 }
