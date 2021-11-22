@@ -1,34 +1,30 @@
 package View;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import java.awt.Font;
-import javax.swing.JMenuItem;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import java.awt.Cursor;
 import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import ViewController.SchedulingController;
-
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class TelaAgendar extends JFrame {
 
@@ -37,6 +33,8 @@ public class TelaAgendar extends JFrame {
 	private JTextField tfData;
 	private JTextField tfHora;
 	private JTable table;
+	private JComboBox<String>jComboBoxCliente;
+	private JComboBox<String>jComboBoxServico;
 
 	/**
 	 * Launch the application.
@@ -52,9 +50,13 @@ public class TelaAgendar extends JFrame {
 		controller = new SchedulingController(this);
 		iniciar();
 		
-	}
 		
-	  private void initComponents() {
+	}
+	
+	
+		
+	  @SuppressWarnings("rawtypes")
+	private void initComponents() {
 		
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaAgendar.class.getResource("/img/LogoCleander.jpg")));
@@ -127,25 +129,25 @@ public class TelaAgendar extends JFrame {
 		lblCliente.setBounds(65, 41, 54, 17);
 		contentPane.add(lblCliente);
 		
-		JComboBox comboBoxCliente = new JComboBox();
-		comboBoxCliente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBoxCliente.setFont(new Font("Arial", Font.PLAIN, 14));
-		comboBoxCliente.setBackground(Color.WHITE);
-		comboBoxCliente.setBounds(129, 39, 200, 22);
-		contentPane.add(comboBoxCliente);
+		jComboBoxCliente = new JComboBox();
+		jComboBoxCliente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jComboBoxCliente.setFont(new Font("Arial", Font.PLAIN, 14));
+		jComboBoxCliente.setBackground(Color.WHITE);
+		jComboBoxCliente.setBounds(129, 39, 200, 22);
+		contentPane.add(jComboBoxCliente);
 		
 		JLabel lblValor = new JLabel("Valor: ");
 		lblValor.setFont(new Font("Arial", Font.PLAIN, 14));
 		lblValor.setBounds(66, 97, 53, 17);
 		contentPane.add(lblValor);
 		
-		JComboBox comboBoxServico = new JComboBox();
-		comboBoxServico.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		comboBoxServico.setBackground(Color.WHITE);
-		comboBoxServico.setForeground(Color.BLACK);
-		comboBoxServico.setFont(new Font("Arial", Font.PLAIN, 14));
-		comboBoxServico.setBounds(129, 67, 135, 23);
-		contentPane.add(comboBoxServico);
+		jComboBoxServico = new JComboBox();
+		jComboBoxServico.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		jComboBoxServico.setBackground(Color.WHITE);
+		jComboBoxServico.setForeground(Color.BLACK);
+		jComboBoxServico.setFont(new Font("Arial", Font.PLAIN, 14));
+		jComboBoxServico.setBounds(129, 67, 135, 23);
+		contentPane.add(jComboBoxServico);
 		
 		tfValor = new JTextField();
 		tfValor.setHorizontalAlignment(SwingConstants.CENTER);
@@ -215,10 +217,17 @@ public class TelaAgendar extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(TelaAgendar.class.getResource("/img/background-agenda.png")));
 		lblNewLabel.setBounds(0, 0, 693, 295);
 		contentPane.add(lblNewLabel);
-	}
+	
+	  
+	  
+		
+	  
+	  }
 
 	private void iniciar() {
 		controller.atualizarTabela();
+		controller.atualizaCliente();
+		controller.atualizaServico();
 		
 	}
 
@@ -229,4 +238,32 @@ public class TelaAgendar extends JFrame {
 	public void setTable(JTable table) {
 		this.table = table;
 	}
+
+
+
+	public JComboBox<String> getjComboBoxCliente() {
+		return jComboBoxCliente;
+	}
+
+
+
+	public JComboBox<String> getjComboBoxServico() {
+		return jComboBoxServico;
+	}
+
+
+
+	public void setjComboBoxCliente(JComboBox<String> jComboBoxCliente) {
+		this.jComboBoxCliente = jComboBoxCliente;
+	}
+
+
+
+	public void setjComboBoxServico(JComboBox<String> jComboBoxServico) {
+		this.jComboBoxServico = jComboBoxServico;
+	}
+	
+	
+	
+	
 }

@@ -2,9 +2,13 @@ package ViewController.Helpers;
 
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.ClienteDAO;
+import Model.Client;
 import Model.Scheduling;
+import Model.Service;
 import View.TelaAgendar;
 
 public class SchedulingHelper {
@@ -33,11 +37,29 @@ public class SchedulingHelper {
 			 });
 		 }
 	 }
+
+
+	public void preencherClientes(ArrayList<Client> clientes) {
+
+		DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getjComboBoxCliente().getModel();
+		
+		for (Client cliente : clientes) {
+			comboBoxModel.addElement(cliente);
+		}
+		
+	}
+
+
+	public void preencherServico(ArrayList<Service> servicos) {
+			DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel) view.getjComboBoxServico().getModel();
+		
+		for (Service service : servicos) {
+			comboBoxModel.addElement(servicos);
+		}
+		
+	}
 	 
-	 
-	 public voidi atualizaCliente() {
-		 
-	 }
+
 	 
 	  
 }
