@@ -58,6 +58,17 @@ public class SchedulingHelper {
 		}
 		
 	}
+
+
+	public Service obterServico() {
+		return (Service) view.getjComboBoxServico().getSelectedItem();
+	}
+
+
+	public void setarValor(float valor) {
+		view.getTfValor().setText(valor + " ");;
+		
+	}
 	 
 
 	 

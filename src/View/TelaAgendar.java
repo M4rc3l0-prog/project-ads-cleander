@@ -25,6 +25,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import ViewController.SchedulingController;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class TelaAgendar extends JFrame {
 
@@ -142,6 +144,12 @@ public class TelaAgendar extends JFrame {
 		contentPane.add(lblValor);
 		
 		jComboBoxServico = new JComboBox();
+		jComboBoxServico.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+		
+			}
+			
+		});
 		jComboBoxServico.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		jComboBoxServico.setBackground(Color.WHITE);
 		jComboBoxServico.setForeground(Color.BLACK);
@@ -174,6 +182,11 @@ public class TelaAgendar extends JFrame {
 		contentPane.add(tfHora);
 		
 		JButton btnNewButton = new JButton("Agendar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.agendar();
+			}
+		});
 		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton.setForeground(Color.BLACK);
 		btnNewButton.setBackground(Color.WHITE);
@@ -229,6 +242,7 @@ public class TelaAgendar extends JFrame {
 		controller.atualizaCliente();
 		controller.atualizaServico();
 		
+		
 	}
 
 	public JTable getTable() {
@@ -261,6 +275,18 @@ public class TelaAgendar extends JFrame {
 
 	public void setjComboBoxServico(JComboBox<String> jComboBoxServico) {
 		this.jComboBoxServico = jComboBoxServico;
+	}
+
+
+
+	public JTextField getTfValor() {
+		return tfValor;
+	}
+
+
+
+	public void setTfValor(JTextField tfValor) {
+		this.tfValor = tfValor;
 	}
 	
 	

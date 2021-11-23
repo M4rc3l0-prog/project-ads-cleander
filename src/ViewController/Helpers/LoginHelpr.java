@@ -3,11 +3,11 @@ package ViewController.Helpers;
 import Model.User;
 import View.TelaLogin;
 
-public class LoginHelps {
+public class LoginHelpr  implements IHelper{
 	
 	private final TelaLogin view;
 	
-	public LoginHelps (TelaLogin view) {
+	public LoginHelpr (TelaLogin view) {
 		this.view = view;
 	}
 	
@@ -29,6 +29,18 @@ public class LoginHelps {
 	public void limpaTela() {
 		view.getTfUsuario().setText(" ");
 		view.getPfSenha().setText(" ");
+	}
+
+	@Override
+	public Object obeterModelo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void limparTela() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

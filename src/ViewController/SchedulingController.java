@@ -42,6 +42,18 @@ public class SchedulingController {
 		 
 		 helper.preencherServico(servicos);
 	 }
+	 
+	 public void atualizaValor() {
+		 Service servico = helper.obterServico();
+		 helper.setarValor(servico.getValor());
+	 }
+
+
+
+	public void agendar() {
+		
+		
+	}
 
 
 }
