@@ -136,7 +136,7 @@ public class Configuracaodb extends javax.swing.JFrame {
 				);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\marce\\Desktop\\project-engineering-software\\Clean\\src\\img\\BANCO-DADOS.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\marce\\eclipse-workspace\\project-ads-cleander-master\\bin\\img\\BANCO-DADOS.png"));
 		lblNewLabel.setBounds(0, -16, 592, 446);
 		jPanel1.add(lblNewLabel);
 
@@ -239,7 +239,7 @@ public class Configuracaodb extends javax.swing.JFrame {
 		boolean leitura = false;
 		try {
 			String linha;
-			String ArquivoConfiguracao = "C:/Users/marce/Desktop/project-engineering-software/ConexaoBanco/Configuracao/conexao.txt";
+			String ArquivoConfiguracao = "C:/Users/marce/eclipse-workspace/project-engineering-software/conexao.txt";
 			int cont = 0;
 			File arq = new File(ArquivoConfiguracao);
 			if (arq.exists()) {
@@ -280,11 +280,11 @@ public class Configuracaodb extends javax.swing.JFrame {
 	private boolean GRAVA_CONFIGURACAO() {
 		boolean grava = false;
 		try {
-			File diretorio = new File("C:/Users/marce/Desktop/project-engineering-software/ConexaoBanco/Configuracao");
+			File diretorio = new File("C:/Users/marce/eclipse-workspace/project-engineering-software");
 			if (!diretorio.exists()) {
 				diretorio.mkdirs();
 			}
-			FileWriter arq1 = new FileWriter("C:/Users/marce/Desktop/project-engineering-software/ConexaoBanco/Configuracao/conexao.txt");
+			FileWriter arq1 = new FileWriter("C:/Users/marce/eclipse-workspace/project-engineering-software/conexao.txt");
 			PrintWriter gravarArq = new PrintWriter(arq1);
 			gravarArq.println(T_Host.getText());
 			gravarArq.println(T_Porta.getText());
@@ -326,7 +326,7 @@ public class Configuracaodb extends javax.swing.JFrame {
 		try {
 			Class.forName(driver);
 			CONEXAO = DriverManager.getConnection("jdbc:mysql://" + SERVIDOR + ":" + PORTA_CONEXAO
-					+ "/cleander", USUARIO, SENHA);
+					+ "/dbcleander", USUARIO, SENHA);
 			com = true;
 		} catch (ClassNotFoundException Fonte) {
 			JOptionPane.showMessageDialog(null, "Driver nao localizado");
@@ -357,7 +357,7 @@ public class Configuracaodb extends javax.swing.JFrame {
 	private boolean CRIA_BANCO() {
 		boolean sucesso = false;
 		PreparedStatement stm;
-		String sql = "CREATE DATABASE IF NOT EXISTS cleander";
+		String sql = "CREATE DATABASE IF NOT EXISTS dbcleander";
 
 		try {
 			stm = CONEXAO.prepareStatement(sql);
@@ -390,17 +390,14 @@ public class Configuracaodb extends javax.swing.JFrame {
 	private boolean CRIA_TABELA_cliente() {
 		boolean sucesso = false;
 		PreparedStatement stm;
-		String sql = "CREATE TABLE  IF NOT EXISTS cliente (\r\n"
-				+ "  `id_cliente` int(11) NOT NULL,\r\n"
-				+ "  `nome_cliente` varchar(100) NOT NULL,\r\n"
-				+ "  `email_cliente` varchar(100) NOT NULL,\r\n"
-				+ "  `telefone_cliente` varchar(9) NOT NULL,\r\n"
-				+ "  `endereco_cliente` varchar(100) NOT NULL,\r\n"
-				+ "  `complemento_cliente` varchar(100) NOT NULL,\r\n"
-				+ "  `sexo_cliente` varchar(20) NOT NULL,\r\n"
-				+ "  `senha_cliente` varchar(30) NOT NULL,\r\n"
-				+ "  `dtnascimento_cliente` varchar(9) NOT NULL,\r\n"
-				+ "  `cliente_servico` int(11) NOT NULL\r\n"
+		String sql = "CREATE TABLE  IF NOT EXISTS agendamento (\r\n"
+				+ "  `id_agendamento` int(11) NOT NULL,\r\n"
+				+ "  `nome` varchar(225) NOT NULL,\r\n"
+				+ "  `servico` varchar(50) NOT NULL,\r\n"
+				+ "  `valor` varchar(100) NOT NULL,\r\n"
+				+ "  `data` varchar(11) NOT NULL,\r\n"
+				+ "  `horario` varchar(11) NOT NULL,\r\n"
+				+ "  `descricao` varchar(100) NOT NULL,\r\n"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 		try {
 			stm = CONEXAO.prepareStatement(sql);
@@ -415,15 +412,14 @@ public class Configuracaodb extends javax.swing.JFrame {
 	private boolean CRIA_TABELA_prestador() {
 		boolean sucesso = false;
 		PreparedStatement stm;
-		String sql = "CREATE TABLE  IF NOT EXISTS prestador (`id_prestador` int(11) NOT NULL,\r\n"
-				+ "  `nome_prestador` varchar(100) NOT NULL,\r\n"
-				+ "  `email_prestador` varchar(100) NOT NULL,\r\n"
-				+ "  `telefone_prestador` varchar(9) NOT NULL,\r\n"
-				+ "  `endereco_prestador` varchar(100) NOT NULL,\r\n"
-				+ "  `sexo_prestador` varchar(20) NOT NULL,\r\n"
-				+ "  `senha_prestador` varchar(30) NOT NULL,\r\n"
-				+ "  `dtnascimento_prestador` varchar(9) NOT NULL,\r\n"
-				+ "  `prestador_servico` int(11) NOT NULL\r\n"
+		String sql = "CREATE TABLE  IF NOT EXISTS CREATE TABLE `cliente` (\r\n"
+				+ "  `id_cliente` int(11) NOT NULL,\r\n"
+				+ "  `nome` varchar(100) NOT NULL,\r\n"
+				+ "  `email` varchar(100) NOT NULL,\r\n"
+				+ "  `endereco` varchar(110) NOT NULL,\r\n"
+				+ "  `cidade` varchar(100) NOT NULL,\r\n"
+				+ "  `telefone` varchar(100) NOT NULL,\r\n"
+				+ "  `sexo` varchar(100) NOT NULL\r\n"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 		try {
 			stm = CONEXAO.prepareStatement(sql);
@@ -438,8 +434,10 @@ public class Configuracaodb extends javax.swing.JFrame {
 	private boolean CRIA_TABELA_servico() {
 		boolean sucesso = false;
 		PreparedStatement stm;
-		String sql = "CREATE TABLE  IF NOT EXISTS servico (`id_servico` int(11) NOT NULL,\r\n"
-				+ "  `nome_servico` varchar(100) NOT NULL\r\n"
+		String sql = "CREATE TABLE  IF NOT EXISTS usuario ("
+				+ "  `id_usuario` int(11) NOT NULL,\r\n"
+				+ "  `login` varchar(40) NOT NULL,\r\n"
+				+ "  `senha` varchar(25) NOT NULL,\r\n"
 				+ ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 		try {
 			stm = CONEXAO.prepareStatement(sql);

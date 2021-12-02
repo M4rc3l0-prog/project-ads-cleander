@@ -23,6 +23,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import connection.Configuracaodb;
 import model.dao.UsuarioDAO;
 
 
@@ -60,6 +61,7 @@ public class TelaLogin extends JFrame {
 		TelaPrincipal principal = new TelaPrincipal();
 		TelaInformacao informacao = new TelaInformacao();
 		TelaCadastro cadastro = new TelaCadastro();
+		Configuracaodb configbd = new Configuracaodb();
 		
 
 		
@@ -187,6 +189,11 @@ public class TelaLogin extends JFrame {
 		contentPane.add(pfSenha);
 		
 		JButton btnBancoDeDados = new JButton("Banco de dados");
+		btnBancoDeDados.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				configbd.setVisible(true);
+			}
+		});
 		btnBancoDeDados.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnBancoDeDados.setBackground(Color.WHITE);
 		btnBancoDeDados.setForeground(Color.BLACK);
