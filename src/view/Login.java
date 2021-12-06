@@ -41,6 +41,7 @@ public class Login extends JFrame {
 	public Login() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/icons/bucket.png")));
 		// Instância
+		BancoDeDados bd = new BancoDeDados();
 		
 		CheckLoginDAO checklogin = new CheckLoginDAO();
 		
@@ -129,6 +130,16 @@ public class Login extends JFrame {
 		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 16));
 		btnCadastrar.setBounds(165, 223, 104, 27);
 		contentPane.add(btnCadastrar);
+		
+		JButton btnDataBase = new JButton("DataBase");
+		btnDataBase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bd.setVisible(true);
+				
+			}
+		});
+		btnDataBase.setBounds(10, 227, 89, 23);
+		contentPane.add(btnDataBase);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setIcon(new ImageIcon(Login.class.getResource("/background/color(435x262).png")));
