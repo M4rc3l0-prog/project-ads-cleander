@@ -148,6 +148,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmAjuda = new JMenuItem("Ajuda");
 		mntmAjuda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
+				
 				try {
 					Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "C:\\Users\\Joao\\Desktop\\Manual.pdf");
 					

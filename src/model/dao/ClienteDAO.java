@@ -53,8 +53,11 @@ public class ClienteDAO {
 				
 				JOptionPane.showMessageDialog(null, "Esse cliente já está registrado","Cliente",JOptionPane.INFORMATION_MESSAGE);
 			}
-			else {
+			else if(clienteDados.getNome().equals("") || clienteDados.getCidade().equals("") || clienteDados.getComodos().equals("") || clienteDados.getEmail().equals("") || clienteDados.getEndereco().equals("") || clienteDados.getNome().equals("") || clienteDados.getTelefone().equals(""))
+			{
+				JOptionPane.showMessageDialog(null, "Por favor preencher os campos", "Atenção", JOptionPane.WARNING_MESSAGE);
 				
+			}else {
 				stmt.execute();
 				JOptionPane.showMessageDialog(null, "Cadastro de cliente realizado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
 			}
