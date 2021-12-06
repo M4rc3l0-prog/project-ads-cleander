@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import model.dao.UsuarioDAO;
+import model.entities.UsuarioDados;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,6 +23,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
+
+
+
 
 public class Cadastro extends JFrame {
 
@@ -47,6 +51,7 @@ public class Cadastro extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Cadastro.class.getResource("/icons/bucket.png")));
 		// Instância
 		UsuarioDAO usuarioDao = new UsuarioDAO();
+		UsuarioDados usuarioDados = new UsuarioDados();
 		// Instância
 		
 		setTitle("Cadastrar");
@@ -102,23 +107,29 @@ public class Cadastro extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			
 				
-					if(new String(pfSenha.getPassword()).equals("") || new String(pfSenha.getPassword()).equals("") ||new String(pfSenhacon.getPassword()).equals("")) {
-						
-						JOptionPane.showMessageDialog(null, "Por favor preencher os campos", "Atenção", JOptionPane.WARNING_MESSAGE);
-					}
-					else if(new String(pfSenha.getPassword()).equals(new String(pfSenhacon.getPassword())) == true) {
-						
-						usuarioDao.registrarUsuario(tfUsuario.getText(), new String(pfSenha.getPassword()));
+				if(new String(pfSenha.getPassword()).equals(new String(pfSenhacon.getPassword()))) {
+					
+					usuarioDados.setSenha(new String(pfSenha.getPassword()));
+					usuarioDados.setUsuario(tfUsuario.getText());
+					usuarioDados.setSenhacon(new String(pfSenhacon.getPassword()));
+					
+						usuarioDao.registrarUsuario(usuarioDados);
 						
 						tfUsuario.setText("");
 						pfSenha.setText("");
 						pfSenhacon.setText("");
-					}
-					else {
+					
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Senhas não conferem!", "Atenção", JOptionPane.WARNING_MESSAGE);
+				}
+				
+				
+												
 						
-						JOptionPane.showMessageDialog(null, "Senhas não conferem!", "Atenção", JOptionPane.WARNING_MESSAGE);
-					}
 			}
+
+			
 		});
 		btnCadastrar.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnCadastrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

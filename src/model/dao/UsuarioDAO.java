@@ -1,77 +1,64 @@
 package model.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.*;
+
 
 import javax.swing.JOptionPane;
 
-import connection.ConnectionFactory;
-import model.entities.Usuario;
-
+import connection.Conexao;
+import model.entities.UsuarioDados;
 public class UsuarioDAO {
 	
-
-	public void creat (Usuario usuario) {
-	  Connection con = ConnectionFactory.getConnection();
-      
-      PreparedStatement stmt = null;
-
-      try {
-          stmt = con.prepareStatement("INSERT INTO usuario (login,senha)VALUES(?,?)");
-          stmt.setString(1, usuario.getLogin());
-          stmt.setString(2, usuario.getSenha());
-        
-       
-          stmt.executeUpdate();
-
-          JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-      } catch (SQLException ex) {
-          System.out.println(ex);
-      } finally {
-          ConnectionFactory.closeConnection(con, stmt);
-      }
-
-
-}
+	private static String sql;
+	private static String checkUsuario;
 	
-	public boolean checklogin(String login, String senha ) {
-
-        Connection con = ConnectionFactory.getConnection();
-        
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        
-        boolean check = false; 
-
-  
-
-        try {
-            stmt = con.prepareStatement("SELECT * FROM usuario WHERE login = ? and senha = ? ");
-            stmt.setString(1, login);
-            stmt.setString(2, senha);
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-
-            	check = true;
-        
-                
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-
-        return check;
-
-    }
-
+	public UsuarioDAO() {
+		
+		sql = "INSERT INTO login(usuario,senha) VALUES (?,?)";
+		checkUsuario = "SELECT * FROM login WHERE usuario=?";
+	}
+	
+	public static void registrarUsuario(UsuarioDados usuarioDados) {
+		
+		try {
+			
+			Connection con = Conexao.fazConexao();
+			
+			PreparedStatement stmt = con.prepareStatement(sql);
+			PreparedStatement check = con.prepareStatement(checkUsuario);
+			
+			stmt.setString(1, usuarioDados.getUsuario());
+			stmt.setString(2, usuarioDados.getSenha());
+			
+			
+			System.out.println(usuarioDados.getUsuario());
+			System.out.println(usuarioDados.getSenha());
+			
+			
+			check.setString(1, usuarioDados.getUsuario());
+			
+			ResultSet rs = check.executeQuery();
+			
+			if(rs.next()) {
+				JOptionPane.showMessageDialog(null, "Usuário já existe","Usuário",JOptionPane.INFORMATION_MESSAGE);
+			}
+			else if(usuarioDados.getUsuario().equals("") || usuarioDados.getSenha().equals("") || usuarioDados.getSenhacon().equals("")) {
+				
+				JOptionPane.showMessageDialog(null, "Por favor preencher os campos", "Atenção", JOptionPane.WARNING_MESSAGE);
+			} 
+			else {
+				stmt.execute();
+				JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!","Sucesso",JOptionPane.INFORMATION_MESSAGE);
+			}
+							
+			stmt.close();
+			con.close();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

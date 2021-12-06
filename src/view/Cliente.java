@@ -154,7 +154,7 @@ public class Cliente extends JFrame {
 				clienteDados.setComodos(tfComodos.getText());
 				clienteDados.setTelefone(tfTelefone.getText());
 				
-																					
+					
 				clienteDao.registrarCliente(clienteDados);
 				
 				tfNome.setText("");
