@@ -60,6 +60,7 @@ public class Login extends JFrame {
 		JButton btnSair = new JButton("Sair");
 		btnSair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				System.exit(0);
 			}
 		});

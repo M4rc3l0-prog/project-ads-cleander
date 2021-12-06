@@ -177,6 +177,7 @@ public class Cliente extends JFrame {
 		btnVoltar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Principal principal = new Principal();
 				principal.setVisible(true);
 				dispose();
